@@ -1,4 +1,4 @@
-## Running Lafand-MT experiments FOR isiZulu
+## Running Lafand-MT experiments for isiZulu
 
 1. ```bash install_spm.sh``` to install the Sentencepiece model if you don't have it.
 
