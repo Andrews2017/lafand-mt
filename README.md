@@ -1,78 +1,23 @@
-## LAFAND-MT: Lacuna Anglo &amp; Franco Africa News Dataset for low-resourced MT
+## Running Lafand-MT experiments FOR isiZulu
 
-### Fine-tune mT5, M2M100, and byT5 using [HuggingFace Transformers](https://github.com/huggingface/transformers/tree/master/examples/pytorch/translation)
+1. ```bash install_spm.sh``` to install the Sentencepiece model if you don't have it.
 
-Step 0: Preprocess your text to be in json lines (see preprocess_mt5.py), you will find an example for Yoruba-English from TSV to JSON
+2. ```bash setup.sh```: If you don't have Joey NMT already installed on your system, this file creates a virtual environment called jnmt, clones the joeynmt github page and install the needed requirement.
 
-Step 1: Install the necessary modules in requirments.txt
+3. ```bash ProcessData.sh``` (optional): Incase any your dataset is still in the tsv format, containing parallel texts, then it has to be separated to independent files for each of the languages. This the format that can be used for training.
 
-Step 2: Fine-tune the pre-trained model, you may use the *base* model e.g "google/byt5-base" and "google/mt5-base"
+4. ```bash train_sp.sh```: The sentencepiece.sh script is responsible for installing the sentencepiece package, training a sentence piece model and obtaining the vocabulary for the sentencepiece model.
 
-```
-python run_translation.py \
-    --model_name_or_path google/byt5-base \
-    --do_train \
-    --do_eval \
-    --source_lang en \
-    --target_lang yo \
-    --source_prefix "translate English to Yoruba: " \
-    --train_file data/en_yo/train.json \
-    --validation_file data/en_yo/dev.json \
-    --test_file data/en_yo/test.json \
-    --output_dir byt5_en_yo \
-    --max_source_length 200 \
-    --max_target_length 200 \
-    --per_device_train_batch_size=10 \
-    --per_device_eval_batch_size=10 \
-    --overwrite_output_dir \
-    --predict_with_generate \
-    --save_steps 50000 \
-    --num_beams 10 \
-    --do_predict
-```
+- uncomment the second line in the file to install sentencepiece
+- Change the variable values to suit your need To train a sentence piece of a particular vocabulary size for a language pair, you can use the following command, check the ```train_sp.sh``` and change the command line argument accordingly.
 
-Testing the model:
+5. ```bash apply_sp.sh```: encoding the training/dev/test sets using the already the trained model. Change the variable values to suit your need.
 
-```
-python run_translation.py \
-    --model_name_or_path byt5_en_yo/en_yo \
-    --source_lang en \
-    --target_lang yo \
-    --source_prefix "translate English to Yoruba: " \
-    --train_file data/en_yo/train.json \
-    --validation_file data/en_yo/dev.json \
-    --test_file data/en_yo/test.json \
-    --output_dir byt5_en_yo \
-    --max_source_length 200 \
-    --max_target_length 200 \
-    --per_device_train_batch_size=10 \
-    --per_device_eval_batch_size=10 \
-    --overwrite_output_dir \
-    --predict_with_generate \
-    --save_steps 50000 \
-    --num_beams 10 \
-    --do_predict
-```
+Check the ```apply_sp.sh``` file and make necessary changes to suit your need.
 
-For MBART and M2M100 e.g "facebook/m2m100_418M", you need to specify the language to generate using "forced_bos_token"
+## To train the models.
+```bash createconfig.sh```: Create a configuration file. It contains the model parameters to use for training.
 
-```
-python run_translation.py \
-    --model_name_or_path facebook/m2m100_418M  \
-    --do_train \
-    --do_eval \
-    --train_file data/en_yo/train.json \
-    --validation_file data/en_yo/dev.json \
-    --test_file data/en_yo/test.json \
-    --source_lang en \
-    --target_lang yo \
-    --output_dir m2m100_en_yo \
-    --per_device_train_batch_size=4 \
-    --per_device_eval_batch_size=4 \
-    --overwrite_output_dir \
-    --predict_with_generate \
-    --forced_bos_token yo \
-    --save_steps 50000 \
-    --num_beams 10 \
-    --do_predict
-```
+```bash buildvocab.sh```: Get the vocabulary needed by JoeyNMT
+
+```bash train.sh```: Run the train script
