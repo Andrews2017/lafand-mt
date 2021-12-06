@@ -1,6 +1,9 @@
 #create config file to train a model over the JW300 en-yo corpus using 10k sp vocabulary 
-python scripts/createconfig.py --source_lang en --target_lang yo --task 10kjw300enyo --model_path  /netscratch/alabi/data/Lafand/joeytrainer/joeynmt/ --data_path /netscratch/alabi/data/Lafand/joeytrainer/data/enyo/spdata/10k/JW/
-#create config file to train a model over the JW300 en-yo corpus using 10k sp vocabulary
-python scripts/createconfig.py --source_lang yo --target_lang en --task 10kjw300yoen --model_path  /netscratch/alabi/data/Lafand/joeytrainer/joeynmt/ --data_path /netscratch/alabi/data/Lafand/joeytrainer/data/enyo/spdata/10k/JW/
+python scripts/createconfig.py --source_lang en --target_lang ig --task lafandEnIg10 --model_path  /home/mila/c/chris.emezue/lafand-mt/joeytrainer/joeynmt/ --data_path /home/mila/c/chris.emezue/lafand-mt/joeytrainer/data/enig/spdata/10k/JW/
 
-python scripts/createconfig.py --source_lang yo --target_lang en --task 10kjw300yoenFTN --model_path  /netscratch/alabi/data/Lafand/joeytrainer/joeynmt/ --data_path /netscratch/alabi/data/Lafand/joeytrainer/data/enyo/spdata/10k/JW/ --finetune
+python scripts/createconfig.py --source_lang ig --target_lang en --task lafandIgEn10 --model_path  /home/mila/c/chris.emezue/lafand-mt/joeytrainer/joeynmt/ --data_path /home/mila/c/chris.emezue/lafand-mt/joeytrainer/data/enig/spdata/10k/JW/
+
+#for 20k
+python scripts/createconfig.py --source_lang en --target_lang ig --task lafandEnIg20 --model_path  /home/mila/c/chris.emezue/lafand-mt/joeytrainer/joeynmt/ --data_path /home/mila/c/chris.emezue/lafand-mt/joeytrainer/data/enig/spdata/20k/JW/
+
+python scripts/createconfig.py --source_lang ig --target_lang en --task lafandIgEn20 --model_path  /home/mila/c/chris.emezue/lafand-mt/joeytrainer/joeynmt/ --data_path /home/mila/c/chris.emezue/lafand-mt/joeytrainer/data/enig/spdata/20k/JW/

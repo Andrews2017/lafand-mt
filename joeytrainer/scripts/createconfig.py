@@ -59,9 +59,9 @@ def main(args):
         learning_rate_min: 0.00000001
         weight_decay: 0.0
         label_smoothing: 0.1
-        batch_size: 4096
+        batch_size: 1024
         batch_type: "token"
-        eval_batch_size: 3600
+        eval_batch_size: 512
         eval_batch_type: "token"
         batch_multiplier: 1
         early_stopping_metric: "ppl"
@@ -109,7 +109,7 @@ def main(args):
             ff_size: 2048            # TODO: Increase to 1024 for smaller data.
             dropout: 0.1
     """.format(name=name, model_path=model_path, checkpoint=checkpoint, data_path=data_path, source_language=source_language, target_language=target_language)
-    with open("joeynmt/configs/transformer_{name}.yaml".format(name=name),'w') as f:
+    with open("/content/drive/MyDrive/lafand-ig/lafand-mt/joeytrainer/joeynmt/configs/transformer_{name}.yaml".format(name=name),'w') as f:
         f.write(config)
 
 

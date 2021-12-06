@@ -1,6 +1,7 @@
 # To install Sentencepiece with Conda
 #conda install -c conda-forge sentencepiece 
 
+
 #To train the sentence piece model training and encoding
 src=$1 #e.g. en the source language code
 tgt=$2 #.e.g. yo the target language code
